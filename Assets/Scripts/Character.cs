@@ -2,15 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Character : MonoBehaviour
 {
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
     private Vector3 currentDestination;
+    public Slider heathBar;
+    public Slider energyBar;
 
     void Start()
     {
+        heathBar.value = CalculateHealth();
+        energyBar.value = CalculateEnergy();
+
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
     }
@@ -18,6 +24,9 @@ public class Character : MonoBehaviour
 // Update is called once per frame
     void FixedUpdate()
     {
+
+        energyBar.value = CalculateEnergy();
+
         _animator.SetFloat("speed", _navMeshAgent.desiredVelocity.magnitude);
 
         if (Input.GetMouseButtonDown(0))
@@ -29,6 +38,8 @@ public class Character : MonoBehaviour
                 if (hit.transform != null)
                 {
                     _navMeshAgent.speed = 2f;
+
+                    GameManager.currentEnergy += 1f;
 
                     currentDestination = hit.point;
                     SetDestination();
@@ -43,7 +54,11 @@ public class Character : MonoBehaviour
             {
                 if (hit.transform != null)
                 {
-                    _navMeshAgent.speed = 4f;
+                    if (GameManager.currentEnergy > 0) {
+                        _navMeshAgent.speed = 4f;
+                    } else {
+                        _navMeshAgent.speed = 2f;
+                    }
 
                     currentDestination = hit.point;
                     SetDestination();
@@ -59,5 +74,18 @@ public class Character : MonoBehaviour
         {
             _navMeshAgent.SetDestination(currentDestination);
         }
+    }
+
+    float CalculateHealth(){
+        return GameManager.currentHealth / GameManager.maxHealth;
+    }
+
+    private void CharacterDamaged(){
+        GameManager.currentHealth -= 1f;
+        heathBar.value = CalculateHealth();
+    }
+
+    float CalculateEnergy(){
+        return GameManager.currentEnergy / GameManager.maxEnergy;
     }
 }
