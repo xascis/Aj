@@ -8,9 +8,12 @@ public class Character : MonoBehaviour
 {
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
+    private Transform _transform;
     private Vector3 currentDestination;
     public Slider heathBar;
     public Slider energyBar;
+    public bool _isRunning;
+    public float oldPosition;
 
     void Start()
     {
@@ -19,13 +22,27 @@ public class Character : MonoBehaviour
 
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
+        _transform = GetComponent<Transform>();
+
+        oldPosition = _transform.position.x;
     }
 
 // Update is called once per frame
     void FixedUpdate()
     {
-
+        if (oldPosition == _transform.position.x) _isRunning = false;
+        if (oldPosition != _transform.position.x) _isRunning = true;
+        oldPosition = _transform.position.x;
+        
+        print(_transform.position.x);
         energyBar.value = CalculateEnergy();
+
+        if (energyBar.value == 0) _navMeshAgent.speed = 2f;
+
+        if (_isRunning && GameManager.currentEnergy > 0) GameManager.currentEnergy -= 2f * Time.deltaTime;
+        if (!_isRunning && GameManager.currentEnergy < 20f) {
+            GameManager.currentEnergy += 1f * Time.deltaTime;
+        }
 
         _animator.SetFloat("speed", _navMeshAgent.desiredVelocity.magnitude);
 
@@ -38,8 +55,6 @@ public class Character : MonoBehaviour
                 if (hit.transform != null)
                 {
                     _navMeshAgent.speed = 2f;
-
-                    GameManager.currentEnergy += 1f;
 
                     currentDestination = hit.point;
                     SetDestination();
@@ -54,11 +69,7 @@ public class Character : MonoBehaviour
             {
                 if (hit.transform != null)
                 {
-                    if (GameManager.currentEnergy > 0) {
-                        _navMeshAgent.speed = 4f;
-                    } else {
-                        _navMeshAgent.speed = 2f;
-                    }
+                    _navMeshAgent.speed = 4f;
 
                     currentDestination = hit.point;
                     SetDestination();
