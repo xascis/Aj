@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.43748954, g: 0.48531282, b: 0.56558746, a: 1}
+  m_IndirectSpecularColor: {r: 0.43748954, g: 0.48531288, b: 0.56558746, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -220,7 +220,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 38874317}
-  m_LocalRotation: {x: 0.21303007, y: 0.00000008591392, z: -0.00000034389203, w: 0.97704566}
+  m_LocalRotation: {x: 0.036429256, y: 0.96265316, z: -0.20989224, w: 0.16708434}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -527,7 +527,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 0f2be7e68001c9542a690a7c901f0ee7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -47.690002
+      value: -45.56
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0f2be7e68001c9542a690a7c901f0ee7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -535,7 +535,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0f2be7e68001c9542a690a7c901f0ee7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 47.539997
+      value: 45.29
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 0f2be7e68001c9542a690a7c901f0ee7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1019,12 +1019,12 @@ MonoBehaviour:
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
     Value: 0
-    m_MaxSpeed: 10
+    m_MaxSpeed: 100
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Horizontal
     m_InputAxisValue: 0
-    m_InvertAxis: 1
+    m_InvertAxis: 0
   m_LegacyRadius: 3.4028235e+38
   m_LegacyHeightOffset: 3.4028235e+38
   m_LegacyHeadingBias: 3.4028235e+38
@@ -1049,7 +1049,6 @@ GameObject:
   m_Component:
   - component: {fileID: 846153305}
   - component: {fileID: 846153304}
-  - component: {fileID: 846153306}
   m_Layer: 0
   m_Name: CM FreeLook1
   m_TagString: Untagged
@@ -1089,15 +1088,15 @@ MonoBehaviour:
     m_DecelTime: 0.1
     m_InputAxisName: Vertical
     m_InputAxisValue: 0
-    m_InvertAxis: 0
+    m_InvertAxis: 1
   m_XAxis:
     Value: 0
-    m_MaxSpeed: 10
+    m_MaxSpeed: 100
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Horizontal
     m_InputAxisValue: 0
-    m_InvertAxis: 1
+    m_InvertAxis: 0
   m_Heading:
     m_HeadingDefinition: 2
     m_VelocityFilterStrength: 4
@@ -1129,7 +1128,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 846153303}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -47.690002, y: 5.069999, z: 40.539997}
+  m_LocalPosition: {x: -47.918964, y: 5.0699997, z: 51.880547}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1305738609}
@@ -1138,18 +1137,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &846153306
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 846153303}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a3deed9aff4cf047b4c7a1e1527c403, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  freeLookCam: {fileID: 0}
 --- !u!1 &899617457
 GameObject:
   m_ObjectHideFlags: 0
@@ -1254,7 +1241,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: b23b0e8353359f24283335319073b83d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -45.27
+      value: -21.44
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b23b0e8353359f24283335319073b83d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1262,7 +1249,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b23b0e8353359f24283335319073b83d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 46.159996
+      value: 22.58
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b23b0e8353359f24283335319073b83d, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1447,15 +1434,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4843044576661402, guid: 0f850d0fac04ede4ea27e49385eb7027, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -30.973534
+      value: -39.39
       objectReference: {fileID: 0}
     - target: {fileID: 4843044576661402, guid: 0f850d0fac04ede4ea27e49385eb7027, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 16.7771
+      value: 16.78
       objectReference: {fileID: 0}
     - target: {fileID: 4843044576661402, guid: 0f850d0fac04ede4ea27e49385eb7027, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 32.865273
+      value: 41.73
       objectReference: {fileID: 0}
     - target: {fileID: 4843044576661402, guid: 0f850d0fac04ede4ea27e49385eb7027, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1603,12 +1590,12 @@ MonoBehaviour:
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
     Value: 0
-    m_MaxSpeed: 10
+    m_MaxSpeed: 100
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Horizontal
     m_InputAxisValue: 0
-    m_InvertAxis: 1
+    m_InvertAxis: 0
   m_LegacyRadius: 3.4028235e+38
   m_LegacyHeightOffset: 3.4028235e+38
   m_LegacyHeadingBias: 3.4028235e+38
@@ -1755,7 +1742,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400006, guid: 61401344e3611ba499b64a26a8c39df4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -46.07
+      value: -45.8
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 61401344e3611ba499b64a26a8c39df4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1763,7 +1750,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 61401344e3611ba499b64a26a8c39df4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 48.71
+      value: 34.43
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: 61401344e3611ba499b64a26a8c39df4, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1844,7 +1831,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1305738607}
-  m_LocalRotation: {x: 0.27195972, y: 0.0000000057322085, z: 0.00000002466129, w: 0.9623087}
+  m_LocalRotation: {x: 0.046509843, y: 0.9481319, z: -0.26795322, w: 0.16457176}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2703,12 +2690,12 @@ MonoBehaviour:
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
     Value: 0
-    m_MaxSpeed: 10
+    m_MaxSpeed: 100
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Horizontal
     m_InputAxisValue: 0
-    m_InvertAxis: 1
+    m_InvertAxis: 0
   m_LegacyRadius: 3.4028235e+38
   m_LegacyHeightOffset: 3.4028235e+38
   m_LegacyHeadingBias: 3.4028235e+38
@@ -3144,8 +3131,8 @@ Camera:
   m_GameObject: {fileID: 1977998483}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.4669811, g: 0.82823664, b: 1, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -3178,8 +3165,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1977998483}
-  m_LocalRotation: {x: 0.24304317, y: 0, z: 0, w: 0.9700155}
-  m_LocalPosition: {x: -47.690002, y: 5.069999, z: 40.539997}
+  m_LocalRotation: {x: 0.04156446, y: 0.9557254, z: -0.23946272, w: 0.16588892}
+  m_LocalPosition: {x: -47.918964, y: 5.0699997, z: 51.880547}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3401,7 +3388,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2018916649}
-  m_LocalRotation: {x: 0.24304308, y: 0.00000018542896, z: -0.000000033708822, w: 0.9700155}
+  m_LocalRotation: {x: 0.04156477, y: 0.9557263, z: -0.23946258, w: 0.16588318}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3655,13 +3642,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2117911022}
-  m_LocalRotation: {x: 0.62088513, y: -0.19826688, z: 0.16636564, w: 0.7399422}
+  m_LocalRotation: {x: 0.73994213, y: -0.16636565, z: 0.19826686, w: 0.6208852}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 80, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 100, y: -30, z: 0}
 --- !u!1001 &2118831241
 Prefab:
   m_ObjectHideFlags: 0
