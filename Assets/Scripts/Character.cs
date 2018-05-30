@@ -12,8 +12,9 @@ public class Character : MonoBehaviour
     private Vector3 currentDestination;
     public Slider heathBar;
     public Slider energyBar;
-    public bool _isRunning;
-    public float oldPosition;
+    private bool _isRunning;
+    private bool _isWalking;
+    private float _oldPosition;
 
     void Start()
     {
@@ -24,23 +25,36 @@ public class Character : MonoBehaviour
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _transform = GetComponent<Transform>();
 
-        oldPosition = _transform.position.x;
+        _oldPosition = _transform.position.x;
     }
 
 // Update is called once per frame
     void FixedUpdate()
     {
-        if (oldPosition == _transform.position.x) _isRunning = false;
-        if (oldPosition != _transform.position.x) _isRunning = true;
-        oldPosition = _transform.position.x;
+        if (_oldPosition == _transform.position.x) {
+            _isRunning = false;
+            _isWalking = false;
+        } else if (_navMeshAgent.speed == 2f) {
+            _isWalking = true;
+            _isRunning = false;
+        } else {
+            _isRunning = true;
+            _isWalking = false;
+        }
         
-        print(_transform.position.x);
+        // if (_oldPosition != _transform.position.x && _navMeshAgent.speed == 2f) _isWalking = true
+        // if (_oldPosition != _transform.position.x && _navMeshAgent.speed == 4f) _isRunning = true;
+        _oldPosition = _transform.position.x;
+        
         energyBar.value = CalculateEnergy();
 
         if (energyBar.value == 0) _navMeshAgent.speed = 2f;
 
-        if (_isRunning && GameManager.currentEnergy > 0) GameManager.currentEnergy -= 2f * Time.deltaTime;
-        if (!_isRunning && GameManager.currentEnergy < 20f) {
+        if (_isRunning && GameManager.currentEnergy > 0) {
+            GameManager.currentEnergy -= 2f * Time.deltaTime;
+        }
+
+        if (!_isRunning && !_isWalking && GameManager.currentEnergy < 20f) {
             GameManager.currentEnergy += 1f * Time.deltaTime;
         }
 
