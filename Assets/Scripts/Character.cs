@@ -59,6 +59,7 @@ public class Character : MonoBehaviour
         _oldPosition = _transform.position.x;
         
         EnergyBar.value = CalculateEnergy();
+        HeathBar.value = CalculateHealth();
 
         if (EnergyBar.value == 0) _navMeshAgent.speed = 2f;
 
@@ -131,9 +132,7 @@ public class Character : MonoBehaviour
     private void Attacked()
     {
 //        _ani.SetTrigger("isInjured");
-        print(_currentHealth);
         _currentHealth -= 2f * Time.deltaTime;
-        HeathBar.value = CalculateHealth();
 //        Messenger<float>.Broadcast("energy", initialEnergy);
     }
 }

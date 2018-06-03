@@ -41,15 +41,17 @@ public class Guard : MonoBehaviour {
 	void Update () {
 		_animator.SetFloat("speed", _navMeshAgent.desiredVelocity.magnitude);
 
+//		print("distancia player: " + Vector3.Distance(_player.transform.position, _transform.position) + " Distancia pivote" + Vector3.Distance(Destination[_current].position, _transform.position));
+
 		if (Vector3.Distance(_player.transform.position, _transform.position) < distanceToFollow
-		    && Vector3.Distance(Destination[_current].position, _transform.position) < maxDistanceToFollow)
+		    && Vector3.Distance(Destination[_current].position, _player.transform.position) < maxDistanceToFollow)
 		{
 			_navMeshAgent.speed = 2f;
 			_navMeshAgent.SetDestination(_player.transform.position);
 		}
 		else
 		{
-			if(_transform.position.x != Destination[_current].position.x)
+			if (_transform.position.x != Destination[_current].position.x)
 			{
 				_navMeshAgent.speed = 1f;
 				_navMeshAgent.SetDestination(Destination[_current].position);
@@ -84,21 +86,10 @@ public class Guard : MonoBehaviour {
 		return false;
 	}
 
-//	private void OnTriggerStay(Collider other)
-//	{
-//		if (other.tag == "Player")
-//		{
-//			print("playe trigger stay");
-//			Messenger.Broadcast("attack");
-//		}
-//	}
-
-	private void OnTriggerEnter(Collider other)
+	private void OnTriggerStay(Collider other)
 	{
-		print("playe trigger enter");
 		if (other.tag == "Player")
 		{
-			print("player trigger enter");
 			Messenger.Broadcast("attack");
 		}
 	}
