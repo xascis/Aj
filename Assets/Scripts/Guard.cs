@@ -16,7 +16,7 @@ public class Guard : MonoBehaviour {
 
 	private GameObject _player;
 	public const float distanceToFollow = 10.0f;
-	public const float maxDistanceToFollow = 50.0f;
+	public const float maxDistanceToFollow = 20.0f;
 
 	private bool _isPatroling;
 	private bool _isFollowing;
@@ -44,13 +44,17 @@ public class Guard : MonoBehaviour {
 		if (Vector3.Distance(_player.transform.position, _transform.position) < distanceToFollow
 		    && Vector3.Distance(Destination[_current].position, _transform.position) < maxDistanceToFollow)
 		{
+			_navMeshAgent.speed = 2f;
 			_navMeshAgent.SetDestination(_player.transform.position);
 		}
 		else
 		{
-			if(_transform.position.x != Destination[_current].position.x){
+			if(_transform.position.x != Destination[_current].position.x)
+			{
+				_navMeshAgent.speed = 1f;
 				_navMeshAgent.SetDestination(Destination[_current].position);
-			} else
+			}
+			else
 			{
 				// asigna nuevo destino
 				if (Waited(5))
