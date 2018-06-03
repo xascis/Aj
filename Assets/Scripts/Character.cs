@@ -9,23 +9,35 @@ public class Character : MonoBehaviour
     private Animator _animator;
     private NavMeshAgent _navMeshAgent;
     private Transform _transform;
-    private Vector3 currentDestination;
-    public Slider heathBar;
-    public Slider energyBar;
+    private Vector3 _currentDestination;
+    public Slider HeathBar;
+    public Slider EnergyBar;
+
+    private float _currentHealth;
+    private static float _maxHealth = 20f;
+
+    private float _currentEnergy;
+    private static float _maxEnergy = 20f;
+
     private bool _isRunning;
     private bool _isWalking;
     private float _oldPosition;
 
     void Start()
     {
-        heathBar.value = CalculateHealth();
-        energyBar.value = CalculateEnergy();
+        _currentEnergy = 20f;
+        _currentHealth = 20f;
+
+        HeathBar.value = CalculateHealth();
+        EnergyBar.value = CalculateEnergy();
 
         _animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _transform = GetComponent<Transform>();
 
         _oldPosition = _transform.position.x;
+
+        Messenger.AddListener("attack", Attacked);
     }
 
 // Update is called once per frame
@@ -46,16 +58,16 @@ public class Character : MonoBehaviour
         // if (_oldPosition != _transform.position.x && _navMeshAgent.speed == 4f) _isRunning = true;
         _oldPosition = _transform.position.x;
         
-        energyBar.value = CalculateEnergy();
+        EnergyBar.value = CalculateEnergy();
 
-        if (energyBar.value == 0) _navMeshAgent.speed = 2f;
+        if (EnergyBar.value == 0) _navMeshAgent.speed = 2f;
 
-        if (_isRunning && GameManager.currentEnergy > 0) {
-            GameManager.currentEnergy -= 2f * Time.deltaTime;
+        if (_isRunning && _currentEnergy > 0) {
+            _currentEnergy -= 2f * Time.deltaTime;
         }
 
-        if (!_isRunning && !_isWalking && GameManager.currentEnergy < 20f) {
-            GameManager.currentEnergy += 1f * Time.deltaTime;
+        if (!_isRunning && !_isWalking && _currentEnergy < 20f) {
+            _currentEnergy += 1f * Time.deltaTime;
         }
 
         _animator.SetFloat("speed", _navMeshAgent.desiredVelocity.magnitude);
@@ -70,7 +82,7 @@ public class Character : MonoBehaviour
                 {
                     _navMeshAgent.speed = 2f;
 
-                    currentDestination = hit.point;
+                    _currentDestination = hit.point;
                     SetDestination();
                 }
             }
@@ -85,7 +97,7 @@ public class Character : MonoBehaviour
                 {
                     _navMeshAgent.speed = 4f;
 
-                    currentDestination = hit.point;
+                    _currentDestination = hit.point;
                     SetDestination();
                 }
             }
@@ -95,22 +107,33 @@ public class Character : MonoBehaviour
 
     private void SetDestination()
     {
-        if (currentDestination != null)
+        if (_currentDestination != null)
         {
-            _navMeshAgent.SetDestination(currentDestination);
+            _navMeshAgent.SetDestination(_currentDestination);
         }
     }
 
+    // valor de la barra de salud
     float CalculateHealth(){
-        return GameManager.currentHealth / GameManager.maxHealth;
+        return _currentHealth / _maxHealth;
     }
 
-    private void CharacterDamaged(){
-        GameManager.currentHealth -= 1f;
-        heathBar.value = CalculateHealth();
-    }
-
+    // valor de la barra de energia
     float CalculateEnergy(){
-        return GameManager.currentEnergy / GameManager.maxEnergy;
+        return _currentEnergy / _maxEnergy;
+    }
+
+//    private void CharacterDamaged(){
+//        _currentHealth -= 1f;
+//        HeathBar.value = CalculateHealth();
+//    }
+
+    private void Attacked()
+    {
+//        _ani.SetTrigger("isInjured");
+        print(_currentHealth);
+        _currentHealth -= 2f * Time.deltaTime;
+        HeathBar.value = CalculateHealth();
+//        Messenger<float>.Broadcast("energy", initialEnergy);
     }
 }

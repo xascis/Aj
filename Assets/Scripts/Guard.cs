@@ -34,9 +34,9 @@ public class Guard : MonoBehaviour {
 		// _rigidBody = GetComponent<RigidBody>();
 
 		_player = GameObject.FindWithTag("Player");
-		
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 		_animator.SetFloat("speed", _navMeshAgent.desiredVelocity.magnitude);
@@ -82,5 +82,24 @@ public class Guard : MonoBehaviour {
 		}
 
 		return false;
+	}
+
+//	private void OnTriggerStay(Collider other)
+//	{
+//		if (other.tag == "Player")
+//		{
+//			print("playe trigger stay");
+//			Messenger.Broadcast("attack");
+//		}
+//	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		print("playe trigger enter");
+		if (other.tag == "Player")
+		{
+			print("player trigger enter");
+			Messenger.Broadcast("attack");
+		}
 	}
 }
