@@ -104,6 +104,8 @@ public class Character : MonoBehaviour
             }
         }
 
+        if (HeathBar.value == 0) Restart();
+
     }
 
     private void SetDestination()
@@ -134,5 +136,11 @@ public class Character : MonoBehaviour
 //        _ani.SetTrigger("isInjured");
         _currentHealth -= 2f * Time.deltaTime;
 //        Messenger<float>.Broadcast("energy", initialEnergy);
+    }
+
+    private void Restart(){
+        _transform.position = new Vector3(-46f, 1f, 45.517f);
+        _navMeshAgent.SetDestination(_transform.position);
+        _currentHealth = _maxHealth;
     }
 }
