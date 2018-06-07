@@ -9,6 +9,7 @@ public class Claire : MonoBehaviour {
     private Transform _transform;
 
 	private GameObject _player;
+	private GameObject _finish;
 
 	public const float distanceToFollow = 7.0f;
 	public const float distanceToStop = 2.0f;
@@ -21,6 +22,7 @@ public class Claire : MonoBehaviour {
         _transform = GetComponent<Transform>();
 		
 		_player = GameObject.FindWithTag("Player");
+		_finish = GameObject.FindWithTag("Finish");
 	}
 	
 	// Update is called once per frame
@@ -39,6 +41,8 @@ public class Claire : MonoBehaviour {
 			_navMeshAgent.SetDestination(_transform.transform.position);
 		}
 
-
+		if(Vector3.Distance(_finish.transform.position, _transform.position) < 5.0f) {
+			print("Congratulations!!");
+		}
 	}
 }

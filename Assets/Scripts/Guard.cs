@@ -25,6 +25,8 @@ public class Guard : MonoBehaviour {
 	private float _timer;
 	private float _timerMax;
 
+	public AudioSource sound;
+
 
 	// Use this for initialization
 	void Start () {
@@ -35,6 +37,9 @@ public class Guard : MonoBehaviour {
 
 		_player = GameObject.FindWithTag("Player");
 
+		sound = GetComponent<AudioSource>();
+
+		// sound.Play();
 	}
 
 	// Update is called once per frame
