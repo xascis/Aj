@@ -27,30 +27,35 @@ public class Guard : MonoBehaviour {
 
 	public AudioSource sound;
 
+	private bool _isPlayingSound;
+
 
 	// Use this for initialization
 	void Start () {
 		_animator = GetComponent<Animator>();
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _transform = GetComponent<Transform>();
-		// _rigidBody = GetComponent<RigidBody>();
 
 		_player = GameObject.FindWithTag("Player");
 
 		sound = GetComponent<AudioSource>();
-
-		// sound.Play();
 	}
 
 	// Update is called once per frame
 	void Update () {
+		// animación dependiendo de la velocidad
 		_animator.SetFloat("speed", _navMeshAgent.desiredVelocity.magnitude);
 
-//		print("distancia player: " + Vector3.Distance(_player.transform.position, _transform.position) + " Distancia pivote" + Vector3.Distance(Destination[_current].position, _transform.position));
-
+		// persigue al jugador
 		if (Vector3.Distance(_player.transform.position, _transform.position) < distanceToFollow
 		    && Vector3.Distance(Destination[_current].position, _player.transform.position) < maxDistanceToFollow)
 		{
+			sound.pitch = 1.5f;
+			if (!_isPlayingSound)
+			{
+				_isPlayingSound = true;
+				sound.Play();
+			}
 			_navMeshAgent.speed = 2f;
 			_navMeshAgent.SetDestination(_player.transform.position);
 		}
@@ -58,11 +63,19 @@ public class Guard : MonoBehaviour {
 		{
 			if (_transform.position.x != Destination[_current].position.x)
 			{
+				sound.pitch = 1f;
+				if (!_isPlayingSound)
+				{
+					_isPlayingSound = true;
+					sound.Play();
+				}
 				_navMeshAgent.speed = 1f;
 				_navMeshAgent.SetDestination(Destination[_current].position);
 			}
 			else
 			{
+				sound.Stop();
+				_isPlayingSound = false;
 				// asigna nuevo destino
 				if (Waited(5))
 				{
@@ -71,9 +84,6 @@ public class Guard : MonoBehaviour {
 				}
 			}
 		}
-
-		// _navMeshAgent.SetDestination(_destination1.transform.position);
-		// _isWalking = true;
 	}
 
 	// función espera x segundos

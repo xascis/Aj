@@ -29,18 +29,22 @@ public class Claire : MonoBehaviour {
 	void Update () {
 		_animator.SetFloat("speed", _navMeshAgent.desiredVelocity.magnitude);
 
+		// sigue al jugador
 		if (Vector3.Distance(_player.transform.position, _transform.position) < distanceToFollow)
 		{
 			_navMeshAgent.SetDestination(_player.transform.position);
 		}
+		// esta parada
 		if (Vector3.Distance(_player.transform.position, _transform.position) > distanceToFollow)
 		{
 			_navMeshAgent.SetDestination(_transform.transform.position);
 		}
+		// se para si está muy cerca del jugador para no chocar
 		if (Vector3.Distance(_player.transform.position, _transform.position) < distanceToStop) {
 			_navMeshAgent.SetDestination(_transform.transform.position);
 		}
 
+		// fin del juego
 		if(Vector3.Distance(_finish.transform.position, _transform.position) < 5.0f) {
 			print("Congratulations!!");
 		}

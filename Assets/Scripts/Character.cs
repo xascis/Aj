@@ -43,6 +43,11 @@ public class Character : MonoBehaviour
 // Update is called once per frame
     void FixedUpdate()
     {
+        // niveles de energia
+        EnergyBar.value = CalculateEnergy();
+        HeathBar.value = CalculateHealth();
+
+        // corriendo o caminado o parado
         if (_oldPosition == _transform.position.x) {
             _isRunning = false;
             _isWalking = false;
@@ -53,26 +58,25 @@ public class Character : MonoBehaviour
             _isRunning = true;
             _isWalking = false;
         }
-        
-        // if (_oldPosition != _transform.position.x && _navMeshAgent.speed == 2f) _isWalking = true
-        // if (_oldPosition != _transform.position.x && _navMeshAgent.speed == 4f) _isRunning = true;
+
         _oldPosition = _transform.position.x;
-        
-        EnergyBar.value = CalculateEnergy();
-        HeathBar.value = CalculateHealth();
 
         if (EnergyBar.value == 0) _navMeshAgent.speed = 2f;
 
+        // si esta corriendo consume energia
         if (_isRunning && _currentEnergy > 0) {
             _currentEnergy -= 2f * Time.deltaTime;
         }
 
-        if (!_isRunning && !_isWalking && _currentEnergy < 20f) {
+        // si esta parado recarga energia
+        if (!_isRunning && !_isWalking && _currentEnergy < _maxEnergy) {
             _currentEnergy += 1f * Time.deltaTime;
         }
 
+        // animación
         _animator.SetFloat("speed", _navMeshAgent.desiredVelocity.magnitude);
 
+        // click izquierdo camina
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -88,6 +92,7 @@ public class Character : MonoBehaviour
                 }
             }
         }
+        // click derecho corre
         if (Input.GetMouseButtonDown(1))
         {
             RaycastHit hit;
@@ -104,6 +109,7 @@ public class Character : MonoBehaviour
             }
         }
 
+        // si se queda sin vida vuelve al inicio
         if (HeathBar.value == 0) Restart();
 
     }
@@ -126,16 +132,9 @@ public class Character : MonoBehaviour
         return _currentEnergy / _maxEnergy;
     }
 
-//    private void CharacterDamaged(){
-//        _currentHealth -= 1f;
-//        HeathBar.value = CalculateHealth();
-//    }
-
     private void Attacked()
     {
-//        _ani.SetTrigger("isInjured");
         _currentHealth -= 2f * Time.deltaTime;
-//        Messenger<float>.Broadcast("energy", initialEnergy);
     }
 
     private void Restart(){
