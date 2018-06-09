@@ -61,6 +61,7 @@ public class Character : MonoBehaviour
 
         _oldPosition = _transform.position.x;
 
+        // si no tiene energia no puede correr
         if (EnergyBar.value == 0) _navMeshAgent.speed = 2f;
 
         // si esta corriendo consume energia
